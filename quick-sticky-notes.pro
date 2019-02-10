@@ -9,14 +9,25 @@ DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000
 
 CONFIG += c++11
 
-INCLUDEPATH += src src/core src/gui src/utils
+INCLUDEPATH += \
+    src \
+    src/data srcdata/local src/data/model src/data/remote \
+    src/gui
 
 SOURCES += \
     src/main.cpp \
-    src/gui/NoteWidget.cpp
+    src/gui/NoteWidget.cpp \
+    src/data/model/Note.cpp \
+    src/data/model/Todo.cpp \
+    src/data/local/LocalDataManager.cpp \
+    src/data/remote/RemoteDataManager.cpp
 
 HEADERS += \
-    src/gui/NoteWidget.h
+    src/gui/NoteWidget.h \
+    src/data/model/Note.h \
+    src/data/model/Todo.h \
+    src/data/local/LocalDataManager.h \
+    src/data/remote/RemoteDataManager.h
 
 FORMS += \
     src/gui/NoteWidget.ui
