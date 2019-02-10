@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/note">
+        <file>icon_add.png</file>
+        <file>icon_delete.png</file>
+        <file>icon_lock.png</file>
+        <file>icon_lock_open.png</file>
+        <file>icon_more.png</file>
+    </qresource>
+    <qresource prefix="/setting"/>
+    <qresource prefix="/todo">
+        <file>icon_checked.png</file>
+        <file>icon_unchecked.png</file>
+    </qresource>
+    <qresource prefix="/app">
+        <file>icon_app.png</file>
+    </qresource>
+</RCC>
