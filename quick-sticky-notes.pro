@@ -11,7 +11,8 @@ CONFIG += c++11
 
 INCLUDEPATH += \
     src \
-    src/data srcdata/local src/data/model src/data/remote \
+    src/data src/data/local src/data/model src/data/remote \
+    src/controllers \
     src/gui
 
 SOURCES += \
@@ -20,14 +21,16 @@ SOURCES += \
     src/data/model/Note.cpp \
     src/data/model/Todo.cpp \
     src/data/local/LocalDataManager.cpp \
-    src/data/remote/RemoteDataManager.cpp
+    src/data/remote/RemoteDataManager.cpp \
+    src/controllers/MainController.cpp
 
 HEADERS += \
     src/gui/NoteWidget.h \
     src/data/model/Note.h \
     src/data/model/Todo.h \
     src/data/local/LocalDataManager.h \
-    src/data/remote/RemoteDataManager.h
+    src/data/remote/RemoteDataManager.h \
+    src/controllers/MainController.h
 
 FORMS += \
     src/gui/NoteWidget.ui
