@@ -1,7 +1,9 @@
 #ifndef NOTEWIDGET_H
 #define NOTEWIDGET_H
 
+#include <QSizeGrip>
 #include <QWidget>
+
 #include "Note.h"
 
 namespace Ui {
@@ -19,15 +21,19 @@ class NoteWidget : public QWidget {
   void mouseReleaseEvent(QMouseEvent* event);
   void mouseMoveEvent(QMouseEvent* event);
 
- public slots:
+  void lock();
+  void unlock();
+
+ private slots:
   void addNoteWidget();
-  void lockNoteWidget();
+  void switchLockStatusNoteWidget();
   void expandMenuNoteWidget();
   void openSettingsDialog();
   void deleteNoteWidget();
 
  private:
   Ui::NoteWidget* ui;
+  QSizeGrip* mSizeGrip;
 
   Note* mNote;
   QPoint mPosition;

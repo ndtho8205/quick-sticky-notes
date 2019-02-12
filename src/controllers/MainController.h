@@ -1,8 +1,9 @@
 #ifndef MAINCONTROLLER_H
 #define MAINCONTROLLER_H
 
-#include <QList>
+#include <QHash>
 #include <QObject>
+
 #include "LocalDataManager.h"
 #include "Note.h"
 #include "NoteWidget.h"
@@ -13,8 +14,15 @@ class MainController : public QObject {
  public:
   static MainController* instance();
 
-  void addNote();
+ public slots:
+  void addNewNote();
   void deleteNote();
+
+  void showAllNote();
+  void hideAllNote();
+
+  void showAboutDialog();
+  void showSettingsDialog();
 
  private:
   MainController();
@@ -22,7 +30,7 @@ class MainController : public QObject {
 
  private:
   LocalDataManager* mDataManager;
-  QList<NoteWidget*> mNoteWidgetList;
+  QHash<QString, NoteWidget*> mNoteWidgetMap;
 
   static MainController* mInstance;
 };

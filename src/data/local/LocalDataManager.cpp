@@ -1,16 +1,26 @@
 #include "LocalDataManager.h"
 
+#include <QDebug>
+
 LocalDataManager::LocalDataManager() {}
 
 LocalDataManager::~LocalDataManager() {
-  qDeleteAll(mNoteList);
-  mNoteList.clear();
+  qDeleteAll(mNoteMap);
+  mNoteMap.clear();
 }
 
-QList<Note*> LocalDataManager::noteList() const {
-  return mNoteList;
+QList<Note*> LocalDataManager::getNoteList() const {
+  return mNoteMap.values();
 }
 
-void LocalDataManager::appendNote(Note* const note) {
-  mNoteList.append(note);
+Note* LocalDataManager::getNoteById(QString noteId) const {
+  return mNoteMap.value(noteId, nullptr);
+}
+
+void LocalDataManager::appendNewNote(Note* const note) {
+  mNoteMap[note->getId()] = note;
+}
+
+void LocalDataManager::updateNote(QString nodeId) {
+  qDebug() << __func__;
 }

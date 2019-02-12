@@ -22,7 +22,8 @@ SOURCES += \
     src/data/model/Todo.cpp \
     src/data/local/LocalDataManager.cpp \
     src/data/remote/RemoteDataManager.cpp \
-    src/controllers/MainController.cpp
+    src/controllers/MainController.cpp \
+    src/gui/AppTrayIcon.cpp
 
 HEADERS += \
     src/gui/NoteWidget.h \
@@ -30,7 +31,8 @@ HEADERS += \
     src/data/model/Todo.h \
     src/data/local/LocalDataManager.h \
     src/data/remote/RemoteDataManager.h \
-    src/controllers/MainController.h
+    src/controllers/MainController.h \
+    src/gui/AppTrayIcon.h
 
 FORMS += \
     src/gui/NoteWidget.ui

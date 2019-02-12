@@ -3,16 +3,25 @@
 
 #include <QDebug>
 #include <QMenu>
+#include <QSizeGrip>
+#include <QSizePolicy>
+
 #include "MainController.h"
 
 NoteWidget::NoteWidget(Note* note, QWidget* parent)
-    : QWidget(parent, Qt::Dialog), ui(new Ui::NoteWidget) {
+    : QWidget(parent), ui(new Ui::NoteWidget) {
   ui->setupUi(this);
-  this->setWindowFlags(Qt::FramelessWindowHint | Qt::Tool);
+
+  mSizeGrip = new QSizeGrip(this);
+  //  mSizeGrip->setStyleSheet("image: none;");
+  ui->layoutBottom->addWidget(mSizeGrip, 0, Qt::AlignBottom | Qt::AlignRight);
+
+  setWindowFlags(Qt::FramelessWindowHint | Qt::Tool);
 
   connect(ui->btnActionAdd, SIGNAL(clicked()), this, SLOT(addNoteWidget()));
-  connect(ui->btnActionLock, SIGNAL(clicked()), this, SLOT(lockNoteWidget()));
-  connect(ui->btnActionMore, SIGNAL(clicked()), this,
+  connect(ui->btnActionLock, SIGNAL(clicked()), this,
+          SLOT(switchLockStatusNoteWidget()));
+  connect(ui->btnActionExpandMenu, SIGNAL(clicked()), this,
           SLOT(expandMenuNoteWidget()));
   connect(ui->btnActionDelete, SIGNAL(clicked()), this,
           SLOT(deleteNoteWidget()));
@@ -25,8 +34,10 @@ NoteWidget::~NoteWidget() {
 }
 
 void NoteWidget::mousePressEvent(QMouseEvent* event) {
-  mPosition = event->pos();
-  mDragging = true;
+  if (!mNote->isLock()) {
+    mPosition = event->pos();
+    mDragging = true;
+  }
 }
 
 void NoteWidget::mouseReleaseEvent(QMouseEvent* event) {
@@ -41,17 +52,34 @@ void NoteWidget::mouseMoveEvent(QMouseEvent* event) {
   }
 }
 
+void NoteWidget::lock() {
+  ui->btnActionLock->setIcon(QIcon(":/note/icon_lock"));
+  mNote->setLockStatus(true);
+  mSizeGrip->setEnabled(false);
+}
+
+void NoteWidget::unlock() {
+  ui->btnActionLock->setIcon(QIcon(":/note/icon_lock_open"));
+  mNote->setLockStatus(false);
+  mSizeGrip->setEnabled(true);
+}
+
 //-------------------------------------------------------------------------------------------------
 // slots
 //-------------------------------------------------------------------------------------------------
 
 void NoteWidget::addNoteWidget() {
   qDebug() << __func__;
-  MainController::instance()->addNote();
+  MainController::instance()->addNewNote();
 }
 
-void NoteWidget::lockNoteWidget() {
+void NoteWidget::switchLockStatusNoteWidget() {
   qDebug() << __func__;
+  if (mNote->isLock()) {
+    unlock();
+  } else {
+    lock();
+  }
 }
 
 void NoteWidget::expandMenuNoteWidget() {

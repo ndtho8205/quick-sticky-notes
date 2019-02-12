@@ -13,6 +13,12 @@
     <height>325</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>Note</string>
   </property>
@@ -34,9 +40,9 @@ QPushButton:pressed, QToolButton:pressed {
   border: none;
 }</string>
   </property>
-  <layout class="QVBoxLayout" name="layout">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
-    <number>2</number>
+    <number>0</number>
    </property>
    <property name="leftMargin">
     <number>2</number>
@@ -48,7 +54,7 @@ QPushButton:pressed, QToolButton:pressed {
     <number>2</number>
    </property>
    <property name="bottomMargin">
-    <number>2</number>
+    <number>0</number>
    </property>
    <item>
     <layout class="QHBoxLayout" name="layoutTopbar">
@@ -154,7 +160,7 @@ QPushButton:pressed, QToolButton:pressed {
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="btnActionMore">
+      <widget class="QToolButton" name="btnActionExpandMenu">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -250,13 +256,20 @@ QPushButton:pressed, QToolButton:pressed {
      </property>
     </widget>
    </item>
+   <item>
+    <layout class="QHBoxLayout" name="layoutBottom">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+    </layout>
+   </item>
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
   <tabstop>txtContent</tabstop>
   <tabstop>btnActionAdd</tabstop>
-  <tabstop>btnActionMore</tabstop>
+  <tabstop>btnActionExpandMenu</tabstop>
   <tabstop>btnActionLock</tabstop>
   <tabstop>btnActionDelete</tabstop>
  </tabstops>

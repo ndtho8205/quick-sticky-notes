@@ -1,7 +1,8 @@
 #ifndef LOCALDATAMANAGER_H
 #define LOCALDATAMANAGER_H
 
-#include <QList>
+#include <QHash>
+
 #include "Note.h"
 
 class LocalDataManager {
@@ -9,11 +10,13 @@ class LocalDataManager {
   LocalDataManager();
   ~LocalDataManager();
 
-  QList<Note*> noteList() const;
-  void appendNote(Note* const note);
+  QList<Note*> getNoteList() const;
+  Note* getNoteById(QString noteId) const;
+  void appendNewNote(Note* const note);
+  void updateNote(QString nodeId);
 
  private:
-  QList<Note*> mNoteList;
+  QHash<QString, Note*> mNoteMap;
 };
 
 #endif  // LOCALDATAMANAGER_H
