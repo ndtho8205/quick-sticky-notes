@@ -250,7 +250,7 @@ QPushButton:pressed, QToolButton:pressed {
     </layout>
    </item>
    <item>
-    <widget class="QPlainTextEdit" name="txtContent">
+    <widget class="NoteTextEdit" name="txtContent">
      <property name="focusPolicy">
       <enum>Qt::ClickFocus</enum>
      </property>
@@ -266,6 +266,13 @@ QPushButton:pressed, QToolButton:pressed {
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>NoteTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header>NoteTextEdit.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>txtContent</tabstop>
   <tabstop>btnActionAdd</tabstop>

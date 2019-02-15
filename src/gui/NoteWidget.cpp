@@ -25,6 +25,8 @@ NoteWidget::NoteWidget(Note* note, QWidget* parent)
           SLOT(expandMenuNoteWidget()));
   connect(ui->btnActionDelete, SIGNAL(clicked()), this,
           SLOT(deleteNoteWidget()));
+  connect(ui->txtContent, &NoteTextEdit::editingFinished, this,
+          &NoteWidget::updateNoteContent);
 
   mNote = note;
 
@@ -41,7 +43,6 @@ NoteWidget::~NoteWidget() {
 }
 
 void NoteWidget::mousePressEvent(QMouseEvent* event) {
-  qDebug() << __PRETTY_FUNCTION__;
   if (!mNote->properties()->locked()) {
     mPosition = event->pos();
     mDragging = true;
@@ -115,5 +116,6 @@ void NoteWidget::unlock() {
 }
 
 void NoteWidget::updateNoteContent() {
+  mNote->setContent(ui->txtContent->toPlainText());
   MainController::getInstance()->updateNote(mNote);
 }

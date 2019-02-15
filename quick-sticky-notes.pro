@@ -25,7 +25,8 @@ SOURCES += \
     src/controllers/MainController.cpp \
     src/gui/AppTrayIcon.cpp \
     src/gui/SettingsDialog.cpp \
-    src/data/model/Properties.cpp
+    src/data/model/Properties.cpp \
+    src/gui/NoteTextEdit.cpp
 
 HEADERS += \
     src/gui/NoteWidget.h \
@@ -36,7 +37,8 @@ HEADERS += \
     src/controllers/MainController.h \
     src/gui/AppTrayIcon.h \
     src/gui/SettingsDialog.h \
-    src/data/model/Properties.h
+    src/data/model/Properties.h \
+    src/gui/NoteTextEdit.h
 
 FORMS += \
     src/gui/NoteWidget.ui \
