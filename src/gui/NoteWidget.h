@@ -1,7 +1,7 @@
 #ifndef NOTEWIDGET_H
 #define NOTEWIDGET_H
 
-#include <QSizeGrip>
+#include <CustomSizeGrip.h>
 #include <QWidget>
 
 #include "Note.h"
@@ -26,6 +26,8 @@ class NoteWidget : public QWidget {
   void switchLockStatusNoteWidget();
   void deleteNoteWidget();
 
+  void resizeNoteWidget();
+
   void expandMenuNoteWidget();
   void openSettingsDialog();
 
@@ -35,7 +37,7 @@ class NoteWidget : public QWidget {
   void updateNoteContent();
 
   Ui::NoteWidget* ui;
-  QSizeGrip* mSizeGrip;
+  CustomSizeGrip* mSizeGrip;
 
   Note* mNote;
   QPoint mPosition;

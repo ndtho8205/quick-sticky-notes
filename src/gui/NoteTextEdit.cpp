@@ -10,7 +10,7 @@ NoteTextEdit::NoteTextEdit(QWidget* parent) : QPlainTextEdit(parent) {
 
 void NoteTextEdit::focusInEvent(QFocusEvent* event) {
   QPlainTextEdit::focusInEvent(event);
-  emit receivedFocus();
+  emit focusReceived();
 }
 
 void NoteTextEdit::focusOutEvent(QFocusEvent* event) {

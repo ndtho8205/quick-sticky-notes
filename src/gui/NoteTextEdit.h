@@ -13,7 +13,7 @@ class NoteTextEdit : public QPlainTextEdit {
 
  signals:
   bool editingFinished();
-  bool receivedFocus();
+  bool focusReceived();
 
  private slots:
   void handleTextChanged();

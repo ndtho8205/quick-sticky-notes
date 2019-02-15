@@ -12,8 +12,7 @@ NoteWidget::NoteWidget(Note* note, QWidget* parent)
     : QWidget(parent), ui(new Ui::NoteWidget) {
   ui->setupUi(this);
 
-  mSizeGrip = new QSizeGrip(this);
-  //  mSizeGrip->setStyleSheet("image: none;");
+  mSizeGrip = new CustomSizeGrip(this);
   ui->layoutBottom->addWidget(mSizeGrip, 0, Qt::AlignBottom | Qt::AlignRight);
 
   setWindowFlags(Qt::FramelessWindowHint | Qt::Tool);
@@ -27,8 +26,11 @@ NoteWidget::NoteWidget(Note* note, QWidget* parent)
           SLOT(deleteNoteWidget()));
   connect(ui->txtContent, &NoteTextEdit::editingFinished, this,
           &NoteWidget::updateNoteContent);
+  connect(mSizeGrip, &CustomSizeGrip::resized, this,
+          &NoteWidget::resizeNoteWidget);
 
   mNote = note;
+  mDragging = !mNote->properties()->locked();
 
   this->move(mNote->properties()->position());
   if (mNote->properties()->locked()) {
@@ -40,6 +42,8 @@ NoteWidget::NoteWidget(Note* note, QWidget* parent)
 
 NoteWidget::~NoteWidget() {
   delete ui;
+  delete mSizeGrip;
+  delete mNote;
 }
 
 void NoteWidget::mousePressEvent(QMouseEvent* event) {
@@ -76,9 +80,13 @@ void NoteWidget::createNoteWidget() {
 void NoteWidget::switchLockStatusNoteWidget() {
   if (mNote->properties()->locked()) {
     unlock();
+    mNote->properties()->unlock();
   } else {
     lock();
+    mNote->properties()->lock();
   }
+
+  MainController::getInstance()->updateNote(mNote);
 }
 
 void NoteWidget::expandMenuNoteWidget() {
@@ -95,24 +103,25 @@ void NoteWidget::deleteNoteWidget() {
   MainController::getInstance()->deleteNote(mNote->id());
 }
 
+void NoteWidget::resizeNoteWidget() {
+  mNote->properties()->setSize(this->size());
+  MainController::getInstance()->updateNote(mNote);
+}
+
 //-------------------------------------------------------------------------------------------------
 // slots
 //-------------------------------------------------------------------------------------------------
 
 void NoteWidget::lock() {
   ui->btnActionLock->setIcon(QIcon(":/note/icon_lock"));
-  mNote->properties()->lock();
+  ui->txtContent->setReadOnly(true);
   mSizeGrip->setEnabled(false);
-
-  MainController::getInstance()->updateNote(mNote);
 }
 
 void NoteWidget::unlock() {
   ui->btnActionLock->setIcon(QIcon(":/note/icon_lock_open"));
-  mNote->properties()->unlock();
+  ui->txtContent->setReadOnly(false);
   mSizeGrip->setEnabled(true);
-
-  MainController::getInstance()->updateNote(mNote);
 }
 
 void NoteWidget::updateNoteContent() {

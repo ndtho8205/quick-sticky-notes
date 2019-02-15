@@ -26,7 +26,8 @@ SOURCES += \
     src/gui/AppTrayIcon.cpp \
     src/gui/SettingsDialog.cpp \
     src/data/model/Properties.cpp \
-    src/gui/NoteTextEdit.cpp
+    src/gui/NoteTextEdit.cpp \
+    src/gui/CustomSizeGrip.cpp
 
 HEADERS += \
     src/gui/NoteWidget.h \
@@ -38,7 +39,8 @@ HEADERS += \
     src/gui/AppTrayIcon.h \
     src/gui/SettingsDialog.h \
     src/data/model/Properties.h \
-    src/gui/NoteTextEdit.h
+    src/gui/NoteTextEdit.h \
+    src/gui/CustomSizeGrip.h
 
 FORMS += \
     src/gui/NoteWidget.ui \
