@@ -18,7 +18,7 @@ NoteWidget::NoteWidget(Note* note, QWidget* parent)
 
   setWindowFlags(Qt::FramelessWindowHint | Qt::Tool);
 
-  connect(ui->btnActionAdd, SIGNAL(clicked()), this, SLOT(addNoteWidget()));
+  connect(ui->btnActionAdd, SIGNAL(clicked()), this, SLOT(createNoteWidget()));
   connect(ui->btnActionLock, SIGNAL(clicked()), this,
           SLOT(switchLockStatusNoteWidget()));
   connect(ui->btnActionExpandMenu, SIGNAL(clicked()), this,
@@ -27,6 +27,13 @@ NoteWidget::NoteWidget(Note* note, QWidget* parent)
           SLOT(deleteNoteWidget()));
 
   mNote = note;
+
+  this->move(mNote->properties()->position());
+  if (mNote->properties()->locked()) {
+    lock();
+  }
+  this->resize(mNote->properties()->size());
+  ui->txtContent->setPlainText(mNote->content());
 }
 
 NoteWidget::~NoteWidget() {
@@ -34,7 +41,8 @@ NoteWidget::~NoteWidget() {
 }
 
 void NoteWidget::mousePressEvent(QMouseEvent* event) {
-  if (!mNote->isLock()) {
+  qDebug() << __PRETTY_FUNCTION__;
+  if (!mNote->properties()->locked()) {
     mPosition = event->pos();
     mDragging = true;
   }
@@ -42,6 +50,10 @@ void NoteWidget::mousePressEvent(QMouseEvent* event) {
 
 void NoteWidget::mouseReleaseEvent(QMouseEvent* event) {
   Q_UNUSED(event);
+  if (mDragging) {
+    mNote->properties()->setPosition(this->pos());
+    MainController::getInstance()->updateNote(mNote);
+  }
   mDragging = false;
 }
 
@@ -52,30 +64,16 @@ void NoteWidget::mouseMoveEvent(QMouseEvent* event) {
   }
 }
 
-void NoteWidget::lock() {
-  ui->btnActionLock->setIcon(QIcon(":/note/icon_lock"));
-  mNote->setLockStatus(true);
-  mSizeGrip->setEnabled(false);
-}
-
-void NoteWidget::unlock() {
-  ui->btnActionLock->setIcon(QIcon(":/note/icon_lock_open"));
-  mNote->setLockStatus(false);
-  mSizeGrip->setEnabled(true);
-}
-
 //-------------------------------------------------------------------------------------------------
 // slots
 //-------------------------------------------------------------------------------------------------
 
-void NoteWidget::addNoteWidget() {
-  qDebug() << __func__;
-  MainController::instance()->addNewNote();
+void NoteWidget::createNoteWidget() {
+  MainController::getInstance()->createNote();
 }
 
 void NoteWidget::switchLockStatusNoteWidget() {
-  qDebug() << __func__;
-  if (mNote->isLock()) {
+  if (mNote->properties()->locked()) {
     unlock();
   } else {
     lock();
@@ -83,14 +81,39 @@ void NoteWidget::switchLockStatusNoteWidget() {
 }
 
 void NoteWidget::expandMenuNoteWidget() {
-  qDebug() << __func__;
+  qDebug() << __PRETTY_FUNCTION__;
 }
 
 void NoteWidget::openSettingsDialog() {
-  qDebug() << __func__;
+  qDebug() << __PRETTY_FUNCTION__;
 }
 
 void NoteWidget::deleteNoteWidget() {
-  qDebug() << __func__;
-  MainController::instance()->deleteNote();
+  close();
+  deleteLater();
+  MainController::getInstance()->deleteNote(mNote->id());
+}
+
+//-------------------------------------------------------------------------------------------------
+// slots
+//-------------------------------------------------------------------------------------------------
+
+void NoteWidget::lock() {
+  ui->btnActionLock->setIcon(QIcon(":/note/icon_lock"));
+  mNote->properties()->lock();
+  mSizeGrip->setEnabled(false);
+
+  MainController::getInstance()->updateNote(mNote);
+}
+
+void NoteWidget::unlock() {
+  ui->btnActionLock->setIcon(QIcon(":/note/icon_lock_open"));
+  mNote->properties()->unlock();
+  mSizeGrip->setEnabled(true);
+
+  MainController::getInstance()->updateNote(mNote);
+}
+
+void NoteWidget::updateNoteContent() {
+  MainController::getInstance()->updateNote(mNote);
 }

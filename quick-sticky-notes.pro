@@ -23,7 +23,9 @@ SOURCES += \
     src/data/local/LocalDataManager.cpp \
     src/data/remote/RemoteDataManager.cpp \
     src/controllers/MainController.cpp \
-    src/gui/AppTrayIcon.cpp
+    src/gui/AppTrayIcon.cpp \
+    src/gui/SettingsDialog.cpp \
+    src/data/model/Properties.cpp
 
 HEADERS += \
     src/gui/NoteWidget.h \
@@ -32,10 +34,13 @@ HEADERS += \
     src/data/local/LocalDataManager.h \
     src/data/remote/RemoteDataManager.h \
     src/controllers/MainController.h \
-    src/gui/AppTrayIcon.h
+    src/gui/AppTrayIcon.h \
+    src/gui/SettingsDialog.h \
+    src/data/model/Properties.h
 
 FORMS += \
-    src/gui/NoteWidget.ui
+    src/gui/NoteWidget.ui \
+    src/gui/SettingsDialog.ui
 
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin

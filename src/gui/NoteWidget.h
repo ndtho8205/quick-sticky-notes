@@ -21,17 +21,19 @@ class NoteWidget : public QWidget {
   void mouseReleaseEvent(QMouseEvent* event);
   void mouseMoveEvent(QMouseEvent* event);
 
-  void lock();
-  void unlock();
-
  private slots:
-  void addNoteWidget();
+  void createNoteWidget();
   void switchLockStatusNoteWidget();
-  void expandMenuNoteWidget();
-  void openSettingsDialog();
   void deleteNoteWidget();
 
+  void expandMenuNoteWidget();
+  void openSettingsDialog();
+
  private:
+  void lock();
+  void unlock();
+  void updateNoteContent();
+
   Ui::NoteWidget* ui;
   QSizeGrip* mSizeGrip;
 

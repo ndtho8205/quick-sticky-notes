@@ -11,41 +11,53 @@ AppTrayIcon::AppTrayIcon() {
 
   mContextMenu = new QMenu();
 
-  QAction* newNoteAction = new QAction("&New note");
-  QAction* settingsAction = new QAction("&Settings");
-  QAction* showAllAction = new QAction("&Show all");
-  QAction* hideAllAction = new QAction("&Hide all");
-  QAction* aboutAction = new QAction("&About");
-  QAction* quitAction = new QAction("&Quit");
+  mNewNoteAction = new QAction("&New note");
+  mSettingsAction = new QAction("&Settings");
+  mShowAllAction = new QAction("&Show all");
+  mHideAllAction = new QAction("&Hide all");
+  mAboutAction = new QAction("&About");
+  mQuitAction = new QAction("&Quit");
 
-  mContextMenu->addAction(newNoteAction);
-  mContextMenu->addAction(settingsAction);
+  mContextMenu->addAction(mNewNoteAction);
+  mContextMenu->addAction(mSettingsAction);
   mContextMenu->addSeparator();
-  mContextMenu->addAction(showAllAction);
-  mContextMenu->addAction(hideAllAction);
+  mContextMenu->addAction(mShowAllAction);
+  mContextMenu->addAction(mHideAllAction);
   mContextMenu->addSeparator();
-  mContextMenu->addAction(aboutAction);
+  mContextMenu->addAction(mAboutAction);
   mContextMenu->addSeparator();
-  mContextMenu->addAction(quitAction);
+  mContextMenu->addAction(mQuitAction);
 
   mTrayIcon->setContextMenu(mContextMenu);
 
-  auto mainController = MainController::instance();
-  QObject::connect(newNoteAction, &QAction::triggered, mainController,
-                   &MainController::addNewNote);
-  QObject::connect(settingsAction, &QAction::triggered, mainController,
+  auto mainController = MainController::getInstance();
+  QObject::connect(mNewNoteAction, &QAction::triggered, mainController,
+                   &MainController::createNote);
+  QObject::connect(mSettingsAction, &QAction::triggered, mainController,
                    &MainController::showSettingsDialog);
-  QObject::connect(showAllAction, &QAction::triggered, mainController,
+  QObject::connect(mShowAllAction, &QAction::triggered, mainController,
                    &MainController::showAllNote);
-  QObject::connect(hideAllAction, &QAction::triggered, mainController,
+  QObject::connect(mHideAllAction, &QAction::triggered, mainController,
                    &MainController::hideAllNote);
-  QObject::connect(aboutAction, &QAction::triggered, mainController,
+  QObject::connect(mAboutAction, &QAction::triggered, mainController,
                    &MainController::showAboutDialog);
-  QObject::connect(quitAction, &QAction::triggered, &QCoreApplication::quit);
+  QObject::connect(mQuitAction, &QAction::triggered, &QCoreApplication::quit);
+}
+
+AppTrayIcon::~AppTrayIcon() {
+  delete mTrayIcon;
+  delete mContextMenu;
+
+  delete mNewNoteAction;
+  delete mSettingsAction;
+  delete mShowAllAction;
+  delete mHideAllAction;
+  delete mAboutAction;
+  delete mQuitAction;
 }
 
 void AppTrayIcon::show() {
-  qDebug() << "Tray icon abailable: " << mTrayIcon->isSystemTrayAvailable();
+  qDebug() << "Tray icon available: " << mTrayIcon->isSystemTrayAvailable();
 
   mTrayIcon->setVisible(true);
   mTrayIcon->showMessage("Quick Sticky Notes", "Quick Sticky Notes is running.",

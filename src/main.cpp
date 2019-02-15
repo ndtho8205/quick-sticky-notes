@@ -12,10 +12,10 @@ void setupTrayIcon();
 int main(int argc, char* argv[]) {
   QApplication a(argc, argv);
 
-  AppTrayIcon* appTrayIcon = new AppTrayIcon();
-  appTrayIcon->show();
+  AppTrayIcon appTrayIcon = AppTrayIcon();
+  appTrayIcon.show();
 
-  MainController::instance()->addNewNote();
+  MainController::getInstance()->run();
 
   return a.exec();
 }

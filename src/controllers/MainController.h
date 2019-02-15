@@ -7,16 +7,23 @@
 #include "LocalDataManager.h"
 #include "Note.h"
 #include "NoteWidget.h"
+#include "SettingsDialog.h"
 
 class MainController : public QObject {
   Q_OBJECT
 
  public:
-  static MainController* instance();
+  static MainController* getInstance();
+
+  void run();
 
  public slots:
-  void addNewNote();
-  void deleteNote();
+  void createNote();
+  void showNote(Note* note = nullptr);
+
+  void updateNote(Note* note);
+
+  void deleteNote(QString noteId);
 
   void showAllNote();
   void hideAllNote();
@@ -24,13 +31,16 @@ class MainController : public QObject {
   void showAboutDialog();
   void showSettingsDialog();
 
+ private slots:
+  void settingsDialogIsFinished(int result);
+
  private:
   MainController();
   ~MainController();
 
- private:
   LocalDataManager* mDataManager;
   QHash<QString, NoteWidget*> mNoteWidgetMap;
+  SettingsDialog* mSettingsDialog;
 
   static MainController* mInstance;
 };

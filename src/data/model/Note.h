@@ -1,24 +1,30 @@
 #ifndef NOTE_H
 #define NOTE_H
 
+#include <QJsonObject>
 #include <QString>
+
+#include "Properties.h"
 
 class Note {
  public:
-  Note();
+  explicit Note();
+  explicit Note(const QJsonObject& json);
 
-  QString getId() const;
+  QString id() const;
 
-  QString getContent() const;
+  QString content() const;
   void setContent(const QString& content);
 
-  bool isLock() const;
-  void setLockStatus(bool lock);
+  Properties* properties();
+
+  void write(QJsonObject& json) const;
 
  private:
   QString mId;
   QString mContent;
-  bool mLock;
+
+  Properties mProperties;
 };
 
 #endif  // NOTE_H
