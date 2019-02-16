@@ -33,13 +33,14 @@ MainController* MainController::getInstance() {
 
 void MainController::run() {
   QList<Note*> notes = mDataManager->getNotes();
+  qDebug() << "Number of notes loaded from local storage:" << notes.size();
   if (notes.empty()) {
     createNote();
   } else {
     foreach (Note* note, notes) { showNote(note); }
   }
 
-  qDebug() << __PRETTY_FUNCTION__ << " is running...";
+  qDebug() << "MainController is now running...";
 }
 
 void MainController::createNote() {
@@ -79,15 +80,16 @@ void MainController::showAboutDialog() {
 void MainController::showSettingsDialog() {
   if (!mSettingsDialog) {
     mSettingsDialog = new SettingsDialog();
-    //    connect(mSettingsDialog, &SettingsDialog::finished, this,
-    //            &MainController::settingsDialogIsFinished);
+    connect(mSettingsDialog, &SettingsDialog::finished, this,
+            &MainController::settingsDialogIsFinished);
     mSettingsDialog->show();
   }
 }
 
 void MainController::settingsDialogIsFinished(int result) {
-  qDebug() << __PRETTY_FUNCTION__;
   if (result == QDialog::Accepted) {
+    qDebug() << __PRETTY_FUNCTION__;
   }
-  //  delete mSettingsDialog;
+  mSettingsDialog->deleteLater();
+  mSettingsDialog = nullptr;
 }

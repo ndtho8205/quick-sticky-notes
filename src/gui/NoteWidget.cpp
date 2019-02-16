@@ -3,13 +3,14 @@
 
 #include <QDebug>
 #include <QMenu>
+#include <QMessageBox>
 #include <QSizeGrip>
 #include <QSizePolicy>
 
 #include "MainController.h"
 
 NoteWidget::NoteWidget(Note* note, QWidget* parent)
-    : QWidget(parent), ui(new Ui::NoteWidget) {
+    : QWidget(parent, Qt::Dialog), ui(new Ui::NoteWidget) {
   ui->setupUi(this);
 
   mSizeGrip = new CustomSizeGrip(this);
@@ -31,7 +32,6 @@ NoteWidget::NoteWidget(Note* note, QWidget* parent)
 
   mNote = note;
   mDragging = !mNote->properties()->locked();
-
   this->move(mNote->properties()->position());
   if (mNote->properties()->locked()) {
     lock();
@@ -98,9 +98,17 @@ void NoteWidget::openSettingsDialog() {
 }
 
 void NoteWidget::deleteNoteWidget() {
-  close();
-  deleteLater();
-  MainController::getInstance()->deleteNote(mNote->id());
+  int deleteConfirmation =
+      QMessageBox(QMessageBox::Warning, "",
+                  "Are you sure you want to delete this note?",
+                  QMessageBox::Ok | QMessageBox::Cancel, nullptr,
+                  Qt::Dialog | Qt::Tool | Qt::MSWindowsFixedSizeDialogHint)
+          .exec();
+  if (deleteConfirmation == QMessageBox::Ok) {
+    close();
+    deleteLater();
+    MainController::getInstance()->deleteNote(mNote->id());
+  }
 }
 
 void NoteWidget::resizeNoteWidget() {

@@ -40,6 +40,7 @@ bool LocalDataManager::writeNote(Note* const note) {
   QFile noteFile(notesDir().filePath(QString("%1.json").arg(note->id())));
   if (!noteFile.open(QIODevice::WriteOnly)) {
     qWarning() << "Couldn't open file to write: " << noteFile.fileName();
+    return false;
   }
 
   QJsonObject noteObject;
@@ -47,6 +48,7 @@ bool LocalDataManager::writeNote(Note* const note) {
   QJsonDocument saveDoc(noteObject);
 
   noteFile.write(saveDoc.toJson());
+  return true;
 }
 
 //
@@ -76,7 +78,6 @@ QList<Note*> LocalDataManager::getNotes() const {
     if (note)
       notes.append(note);
   }
-  qDebug() << "Loaded notes: " << notes.size();
 
   return notes;
 }

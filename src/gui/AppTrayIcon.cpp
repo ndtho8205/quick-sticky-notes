@@ -60,6 +60,7 @@ void AppTrayIcon::show() {
   qDebug() << "Tray icon available: " << mTrayIcon->isSystemTrayAvailable();
 
   mTrayIcon->setVisible(true);
-  mTrayIcon->showMessage("Quick Sticky Notes", "Quick Sticky Notes is running.",
-                         QSystemTrayIcon::Information, 1000);
+  mTrayIcon->showMessage("Quick Sticky Notes",
+                         "Quick Sticky Notes is now running.",
+                         QIcon(":/app/icon_app.png"), 1000);
 }
