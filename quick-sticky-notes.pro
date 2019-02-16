@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui webenginewidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -27,7 +27,9 @@ SOURCES += \
     src/gui/SettingsDialog.cpp \
     src/data/model/Properties.cpp \
     src/gui/NoteTextEdit.cpp \
-    src/gui/CustomSizeGrip.cpp
+    src/gui/CustomSizeGrip.cpp \
+    src/gui/TodoWebView.cpp \
+    src/gui/TodoWidget.cpp
 
 HEADERS += \
     src/gui/NoteWidget.h \
@@ -40,11 +42,14 @@ HEADERS += \
     src/gui/SettingsDialog.h \
     src/data/model/Properties.h \
     src/gui/NoteTextEdit.h \
-    src/gui/CustomSizeGrip.h
+    src/gui/CustomSizeGrip.h \
+    src/gui/TodoWebView.h \
+    src/gui/TodoWidget.h
 
 FORMS += \
     src/gui/NoteWidget.ui \
-    src/gui/SettingsDialog.ui
+    src/gui/SettingsDialog.ui \
+    src/gui/TodoWidget.ui
 
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin

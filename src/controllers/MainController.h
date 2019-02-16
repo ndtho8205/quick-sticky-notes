@@ -8,6 +8,7 @@
 #include "Note.h"
 #include "NoteWidget.h"
 #include "SettingsDialog.h"
+#include "TodoWidget.h"
 
 class MainController : public QObject {
   Q_OBJECT
@@ -40,6 +41,7 @@ class MainController : public QObject {
 
   LocalDataManager* mDataManager;
   QHash<QString, NoteWidget*> mNoteWidgetMap;
+  TodoWidget* mTodoWidget;
   SettingsDialog* mSettingsDialog;
 
   static MainController* mInstance;

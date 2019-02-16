@@ -40,6 +40,9 @@ void MainController::run() {
     foreach (Note* note, notes) { showNote(note); }
   }
 
+  mTodoWidget = new TodoWidget();
+  mTodoWidget->show();
+
   qDebug() << "MainController is now running...";
 }
 
