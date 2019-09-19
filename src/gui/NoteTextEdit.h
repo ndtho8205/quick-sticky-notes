@@ -3,23 +3,24 @@
 
 #include <QPlainTextEdit>
 
-class NoteTextEdit : public QPlainTextEdit {
-  Q_OBJECT
- public:
-  explicit NoteTextEdit(QWidget* parent = nullptr);
+class NoteTextEdit : public QPlainTextEdit
+{
+    Q_OBJECT
+public:
+    explicit NoteTextEdit(QWidget *parent = nullptr);
 
-  void focusInEvent(QFocusEvent* event);
-  void focusOutEvent(QFocusEvent* event);
+    void focusInEvent(QFocusEvent *event);
+    void focusOutEvent(QFocusEvent *event);
 
- signals:
-  bool editingFinished();
-  bool focusReceived();
+signals:
+    bool editingFinished();
+    bool focusReceived();
 
- private slots:
-  void handleTextChanged();
+private slots:
+    void handleTextChanged();
 
- private:
-  bool mChanged;
+private:
+    bool mChanged;
 };
 
-#endif  // NOTETEXTEDIT_H
+#endif // NOTETEXTEDIT_H

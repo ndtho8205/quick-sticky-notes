@@ -5,6 +5,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = quick-sticky-notes
 TEMPLATE = app
 
+# fail to compile if deprecated APIs are used
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000
 
 CONFIG += c++11

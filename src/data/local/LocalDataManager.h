@@ -6,30 +6,31 @@
 
 #include "Note.h"
 
-class LocalDataManager {
- public:
-  static LocalDataManager* getInstance();
-  static void deleteInstance();
+class LocalDataManager
+{
+public:
+    static LocalDataManager *getInstance();
+    static void deleteInstance();
 
-  QList<Note*> getNotes() const;
-  Note* getNoteById(QString noteId) const;
+    QList<Note *> getNotes() const;
+    Note *getNoteById(QString noteId) const;
 
-  void insertNote(Note* const note);
+    void insertNote(Note *const note);
 
-  void updateNote(Note* const note);
+    void updateNote(Note *const note);
 
-  void deleteNoteById(QString noteId);
+    void deleteNoteById(QString noteId);
 
- private:
-  LocalDataManager();
-  ~LocalDataManager();
+private:
+    LocalDataManager();
+    ~LocalDataManager();
 
-  QDir notesDir() const;
-  Note* readNoteByFilename(QString noteFilename) const;
-  Note* readNoteById(QString noteId) const;
-  bool writeNote(Note* const note);
+    QDir notesDir() const;
+    Note *readNoteByFilename(QString noteFilename) const;
+    Note *readNoteById(QString noteId) const;
+    bool writeNote(Note *const note);
 
-  static LocalDataManager* mInstance;
+    static LocalDataManager *mInstance;
 };
 
-#endif  // LOCALDATAMANAGER_H
+#endif // LOCALDATAMANAGER_H

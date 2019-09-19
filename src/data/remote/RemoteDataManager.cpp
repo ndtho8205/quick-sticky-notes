@@ -1,6 +1,3 @@
 #include "RemoteDataManager.h"
 
-RemoteDataManager::RemoteDataManager()
-{
-
-}
+RemoteDataManager::RemoteDataManager() {}

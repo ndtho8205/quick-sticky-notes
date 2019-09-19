@@ -3,20 +3,21 @@
 
 #include <QSizeGrip>
 
-class CustomSizeGrip : public QSizeGrip {
-  Q_OBJECT
- public:
-  explicit CustomSizeGrip(QWidget* parent = nullptr);
+class CustomSizeGrip : public QSizeGrip
+{
+    Q_OBJECT
+public:
+    explicit CustomSizeGrip(QWidget *parent = nullptr);
 
-  void mouseReleaseEvent(QMouseEvent* event);
+    void mouseReleaseEvent(QMouseEvent *event);
 
- signals:
-  bool resized();
+signals:
+    bool resized();
 
- public slots:
+public slots:
 
- private:
-  bool mResizing;
+private:
+    bool mResizing;
 };
 
-#endif  // CUSTOMSIZEGRIP_H
+#endif // CUSTOMSIZEGRIP_H

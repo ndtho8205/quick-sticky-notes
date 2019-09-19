@@ -6,25 +6,26 @@
 
 #include "Properties.h"
 
-class Note {
- public:
-  explicit Note();
-  explicit Note(const QJsonObject& json);
+class Note
+{
+public:
+    explicit Note();
+    explicit Note(const QJsonObject &json);
 
-  QString id() const;
+    QString id() const;
 
-  QString content() const;
-  void setContent(const QString& content);
+    QString content() const;
+    void setContent(const QString &content);
 
-  Properties* properties();
+    Properties *properties();
 
-  void write(QJsonObject& json) const;
+    void write(QJsonObject &json) const;
 
- private:
-  QString mId;
-  QString mContent;
+private:
+    QString mId;
+    QString mContent;
 
-  Properties mProperties;
+    Properties mProperties;
 };
 
-#endif  // NOTE_H
+#endif // NOTE_H

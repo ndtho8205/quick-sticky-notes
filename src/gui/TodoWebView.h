@@ -3,15 +3,16 @@
 
 #include <QtWebEngineWidgets/QWebEngineView>
 
-class TodoWebView : public QWebEngineView {
-  Q_OBJECT
- public:
-  explicit TodoWebView(QWidget* parent = nullptr);
+class TodoWebView : public QWebEngineView
+{
+    Q_OBJECT
+public:
+    explicit TodoWebView(QWidget *parent = nullptr);
 
-  void run();
- signals:
+    void run();
+signals:
 
- public slots:
+public slots:
 };
 
-#endif  // TODOWEBVIEW_H
+#endif // TODOWEBVIEW_H

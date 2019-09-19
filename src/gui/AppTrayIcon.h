@@ -4,23 +4,24 @@
 #include <QMenu>
 #include <QSystemTrayIcon>
 
-class AppTrayIcon {
- public:
-  AppTrayIcon();
-  ~AppTrayIcon();
+class AppTrayIcon
+{
+public:
+    AppTrayIcon();
+    ~AppTrayIcon();
 
-  void show();
+    void show();
 
- private:
-  QSystemTrayIcon* mTrayIcon;
-  QMenu* mContextMenu;
+private:
+    QSystemTrayIcon *mTrayIcon;
+    QMenu *mContextMenu;
 
-  QAction* mNewNoteAction;
-  QAction* mSettingsAction;
-  QAction* mShowAllAction;
-  QAction* mHideAllAction;
-  QAction* mAboutAction;
-  QAction* mQuitAction;
+    QAction *mNewNoteAction;
+    QAction *mSettingsAction;
+    QAction *mShowAllAction;
+    QAction *mHideAllAction;
+    QAction *mAboutAction;
+    QAction *mQuitAction;
 };
 
-#endif  // APPTRAYICON_H
+#endif // APPTRAYICON_H

@@ -10,41 +10,42 @@
 #include "SettingsDialog.h"
 #include "TodoWidget.h"
 
-class MainController : public QObject {
-  Q_OBJECT
+class MainController : public QObject
+{
+    Q_OBJECT
 
- public:
-  static MainController* getInstance();
+public:
+    static MainController *getInstance();
 
-  void run();
+    void run();
 
- public slots:
-  void createNote();
-  void showNote(Note* note = nullptr);
+public slots:
+    void createNote();
+    void showNote(Note *note = nullptr);
 
-  void updateNote(Note* note);
+    void updateNote(Note *note);
 
-  void deleteNote(QString noteId);
+    void deleteNote(QString noteId);
 
-  void showAllNote();
-  void hideAllNote();
+    void showAllNote();
+    void hideAllNote();
 
-  void showAboutDialog();
-  void showSettingsDialog();
+    void showAboutDialog();
+    void showSettingsDialog();
 
- private slots:
-  void settingsDialogIsFinished(int result);
+private slots:
+    void settingsDialogIsFinished(int result);
 
- private:
-  MainController();
-  ~MainController();
+private:
+    MainController();
+    ~MainController();
 
-  LocalDataManager* mDataManager;
-  QHash<QString, NoteWidget*> mNoteWidgetMap;
-  TodoWidget* mTodoWidget;
-  SettingsDialog* mSettingsDialog;
+    LocalDataManager *mDataManager;
+    QHash<QString, NoteWidget *> mNoteWidgetMap;
+    TodoWidget *mTodoWidget;
+    SettingsDialog *mSettingsDialog;
 
-  static MainController* mInstance;
+    static MainController *mInstance;
 };
 
-#endif  // MAINCONTROLLER_H
+#endif // MAINCONTROLLER_H
